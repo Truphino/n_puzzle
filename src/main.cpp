@@ -6,13 +6,22 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:35:49 by trecomps          #+#    #+#             */
-/*   Updated: 2018/05/03 16:13:07 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:16:10 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "NpuzzleSolver.class.hpp"
 #include "Heuristics.class.hpp"
 #include "Node.class.hpp"
+#include "AStar.class.hpp"
+
+void	print_path(Node const *end)
+{
+	if (end == NULL)
+		return;
+	print_path(end->getParent());
+	std::cout << *end << std::endl;
+}
 
 int		main(void)
 {
@@ -21,25 +30,25 @@ int		main(void)
 	std::vector<int>				row;
 	Heuristics						h;
 
-	t[0][0] = 7;
-	t[0][1] = 6;
-	t[0][2] = 3;
-	t[1][0] = 4;
-	t[1][1] = 5;
-	t[1][2] = 8;
-	t[2][0] = 1;
-	t[2][1] = 2;
-	t[2][2] = 0;
+	t[0][0] = 2;
+	t[0][1] = 3;
+	t[0][2] = 0;
+	t[1][0] = 1;
+	t[1][1] = 4;
+	t[1][2] = 5;
+	t[2][0] = 8;
+	t[2][1] = 7;
+	t[2][2] = 6;
 	Grid							grid(3, t);
 	n.solveGrid();
 	h.setGrid(n.getGrid());
-
+	AStar							a_star(n.getGrid(), "linearConflict");
 	Node							node(grid);
-	std::list<Node*>				childs = node.nextNodes();
-	std::cout << h << std::endl;
+	Node							*res;
 	std::cout << node << std::endl;
-	for (std::list<Node*>::iterator i = childs.begin(); i != childs.end(); i++)
-		std::cout << **i << std::endl;
-	std::cout << h.heuristic(grid, "manhattanDistance") << std::endl;
-	std::cout << h.heuristic(grid, "linearConflict") << std::endl;
+	res = a_star.a_star(&node);
+	if (res)
+		print_path(res);
+	else
+		std::cout << "No path" << std::endl;
 }

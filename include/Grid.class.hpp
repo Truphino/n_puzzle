@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 13:37:15 by trecomps          #+#    #+#             */
-/*   Updated: 2018/05/03 15:13:30 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/05/07 11:04:00 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ private :
 
 };
 
+bool				operator==(Grid const &a, Grid const &b);
 std::ostream		&operator<<(std::ostream &o, Grid const &i);
 
 #endif

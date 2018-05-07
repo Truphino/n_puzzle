@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 13:37:35 by trecomps          #+#    #+#             */
-/*   Updated: 2018/05/03 15:15:32 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/05/07 11:00:27 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,21 @@ int				Grid::isInGrid(int s) const
 {
 	if (s >= 0 && s < this->_size)
 		return (1);
+	return (0);
+}
+
+bool			operator==(Grid const &a, Grid const &b)
+{
+	int			size;
+
+	if (a.getSize() != b.getSize())
+		return (0);
+	else
+	{
+		size = a.getSize();
+		if (a.getGrid() == b.getGrid())
+			return (1);
+	}
 	return (0);
 }
 

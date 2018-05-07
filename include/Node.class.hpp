@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 12:32:50 by trecomps          #+#    #+#             */
-/*   Updated: 2018/05/03 15:54:57 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:01:48 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,27 @@ public :
 
 	Node	&operator=(Node const &rhs);
 
-	Grid					getGrid(void) const;
+	Grid const				&getGrid(void) const;
 	Node const				*getParent(void) const;
 	std::list<Node*>		nextNodes(void) const;
 	Node					*newChild(Axis axis,
 								int posNeg, std::vector<int> pos) const;
+	void					setG(int g);
+	void					setH(int h);
+	int						getF(void) const;
+	int						getG(void) const;
+	int						getH(void) const;
 
 private :
 	Grid			_grid;
 	Node const		*_parent;
 
+	int				_h;
+	int				_g;
+
 };
 
-std::ostream		&operator<<(std::ostream &o, Node const &i);
+std::ostream				&operator<<(std::ostream &o, Node const &i);
+std::list<Node*>::iterator	findGridList(std::list<Node*> *lst, Grid const &g);
 
 #endif
